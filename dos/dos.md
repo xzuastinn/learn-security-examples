@@ -33,3 +33,9 @@ Answer the following:
 1. Briefly explain the potential vulnerabilities in **insecure.ts** that can lead to a DoS attack.
 2. Briefly explain how a malicious attacker can exploit them.
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the DoS vulnerability?
+
+1. The endpoint is vulnerable to DoS (Denial of Service) attacks because user input (id) is used directly in a MongoDB query. Malicious attackers can send large payloads or invalid MongoDB ObjectIDs, which can crash the database or exhaust server resources. Also, there are no rate limits or input validations.
+
+2. Attackers can flood the /userinfo route with malformed id values or excessively large queries. This could overwhelm the database, causing it to slow down or crash. Repeated requests without protections like rate limiting can also exhaust the server's memory or CPU.
+
+3. To prevent this, input validation is critical—id should be validated against a proper MongoDB ObjectID format using libraries like mongoose.Types.ObjectId.isValid(). Rate limiting with tools like express-rate-limit can block repeated requests from the same IP. Additionally, handling invalid input gracefully prevents crashes. These steps ensure the server remains stable under attacks.

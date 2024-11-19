@@ -33,3 +33,9 @@ Answer the following:
 1. Briefly explain the potential vulnerabilities in **insecure.ts**
 2. Briefly explain how a malicious attacker can exploit them.
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the information disclosure vulnerability?
+
+1. The code is vulnerable to NoSQL injection because user input from req.query is used directly in the database query without proper sanitization or validation. An attacker can craft malicious input to manipulate the query and access or modify unauthorized data. Additionally, information disclosure is possible since sensitive user data is directly sent back in the response.
+
+2. An attacker could exploit this by passing a specially crafted query like username[$ne]=null to bypass authentication entirely. They could also extract data about users by taking advantage of the console.log(username) statement or the response format. This leaks information that shouldn't be exposed, making the app a goldmine for attackers.
+
+3. In secure.ts, input validation and sanitization are key. Query parameters are parsed and checked for expected types or patterns before use. For example, parameterized queries or libraries like mongoose-express-sanitizer help neutralize malicious inputs. To prevent info disclosure, only minimal, necessary data is returned to users, and error messages are vague—like "Invalid login attempt" instead of revealing what failed. These steps make exploiting harder.
