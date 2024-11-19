@@ -28,6 +28,7 @@ Answer the following:
 2. Briefly explain how a malicious attacker can exploit them.
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the privilege escalation vulnerability?
 
+## Answers
 1. The code has a privilege escalation vulnerability because it relies on insecure authentication and authorization. The user role isn't validated against a secure session or token, allowing attackers to spoof or manipulate requests to escalate privileges.
 
 2. An attacker can bypass the admin check by directly sending a POST request with another user's userId and a new role. Since there's no session-based authentication or role verification, they could promote themselves to admin.
